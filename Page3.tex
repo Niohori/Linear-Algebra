@@ -1,0 +1,145 @@
+\documentclass{standalone}
+ 
+% Required package
+\usepackage{tikz}
+\usepackage{amssymb}
+\usepackage{ntheorem}
+\usepackage{tensor}
+%\usepackage{physics}
+\usepackage[italicdiff]{physics}
+\usepackage{calc}
+\usepackage{mathrsfs}
+ \usetikzlibrary {backgrounds,mindmap}
+ \usetikzlibrary{decorations.pathmorphing,decorations.markings}
+\usetikzlibrary{decorations.pathreplacing} %
+\begin{document}
+ 
+\begin{tikzpicture}[
+    mindmap,
+    concept color = gray!30,
+    every node/.style = {concept},
+    grow cyclic,
+    minimum size=5cm,
+    every annotation/.style={fill=gray!3},
+    level 1/.append style = {
+        concept color = gray!30,
+        minimum size=4cm,
+        level distance = 4.5cm,
+        sibling angle = 120
+    },
+    level 2/.append style = {
+        concept color = gray!30,
+        minimum size=3.5cm,
+        level distance = 3cm,
+        sibling angle = 45
+    },
+    level 3/.append style = {
+        concept color = gray!30,
+        minimum size=3.5cm,
+        level distance = 3cm,
+        sibling angle = 45
+    }
+]
+\tikzstyle{circle connection bar}=[to path={
+  [every circle connection bar]
+  decorate [decoration={snake}]
+  { -- (\tikztotarget) \tikztonodes}
+},
+append after command={[fill=olive,draw=olive]}
+]
+
+\tikzstyle{example}=[{circle,decoration=saw,decorate,fill=gray!10,inner sep=8pt}]
+\definecolor{def}{RGB}{240,230,230}
+ 
+\coordinate(N1) at (-13.5,73) {} {} {} {} {} {} {} ;
+\coordinate(N2) at (10,73) {} {} {} {} {} {};
+\coordinate(N3) at (-13,55) {} {} {} {} {} {} ;
+\coordinate(N4) at (-3,65) {} {} {} {} {} {} {} {};
+\coordinate(N5) at (9.5,65) {} {} {};
+\coordinate(N6) at (9.5,55) {} {} {} {};
+\coordinate(N7) at (-15,43.5) {} {} {} {} {} {} ;
+\coordinate(N8) at (-19.5,33) {} {} {} {} ;
+\coordinate(N9) at (-3,7) {} {} {} {} ;
+\coordinate(N10) at (-23,19) {} {} {} {} ;
+\coordinate(N11) at (-16.5,19) {} {} {} {} {} {} {} {} {} {} ;
+\coordinate(N12) at (-3,20) {} {} {} {} {} ;
+\coordinate(N13) at (-23,7) {} {} {} {} {} ;
+\coordinate(N14) at (-6,30.5) {} {} {} {} {} {};
+\coordinate(N15) at (2.5,48) {} {} {} {} {} {} {};
+\coordinate(N16) at (-37.5,42) {} {} {};
+\coordinate(N17) at (-13,23.5) {} {} {} {} {} {} {};
+\coordinate(N18) at (-33.5,74) {} {} {} {} {} {} {} {};
+\coordinate(N19) at (-45,55.5) {};
+\coordinate(N20) at (-1.5,50) {} {};
+
+
+
+
+%Inner product
+\node (IP) [concept,minimum size=6cm]
+ at (N1){Inner product $$<u,v>:V\times V\rightarrow \mathbb{F}$$ }
+child [grow = north west]{node[left,fill=def](IP4)  { Dot product  $x,y \in \mathbb{R}^n : x.y = x_1y_1+\dots +x_ny_n$}
+}
+child [grow = north east]{node[minimum size=3.2cm,right,fill=def](IP5)  { Norm $$\left\| v\right\|=\sqrt{<v,v>}$$}
+};
+\node [annotation,below,text width = 6cm,fill=def] at (IP.south){\textbf{Positivity}\newline \newline$<v,v>\ge 0,\forall v\in V$\newline\newline
+
+\textbf{Definiteness}\newline $<v,v>=0\Leftrightarrow v=0$\newline\newline
+
+\textbf{Additive in the first slot}\newline \newline$<u+v,w>= <u,w>+<v,w>,\  \forall u,v,w \in V$\newline\newline
+
+\textbf{Homogeneous in first slot}\newline\newline $<\lambda u,v>= \lambda <u,v>,\ \forall \lambda \in \mathbb{F}, \forall u,v\in V$\newline\newline
+
+\textbf{Conjugate Symmetry}\newline\newline $<u,v>= \overline {<v,u>},\ \forall u, v\in V$\newline\newline
+};
+\node [annotation,left,fill = def] at (IP.west){\textbf{Inner product Space}\newline\newline
+An inner product space is a vector space $V$ equipped with an innner product on $V$.};
+\node [annotation,right,text width = 6.9cm] at (IP.east){\textbf{Properties}\newline\newline
+$\begin{array}{ll}
+\bullet& \forall \ fixed u \in V:\ <v,u> \text{ is a linear map from }V \ to \mathbb{F}\\\\
+\bullet& <0,u> = 0,\ \forall u \in V\\\\
+\bullet &<u,0> = 0,\ \forall u \in V\\\\
+\bullet& <u,v+w> = <u,v>+ <u,w> \ \forall u,v \in V\\\\
+\bullet& <u,\lambda v> = \overline{\lambda}<u,v>, \ \forall \lambda \ in \mathbb{F} \ and\ u,v\in V
+\end{array}$
+};
+\node [annotation,right] at (IP5.east){$\bullet\quad \left\| v\right\|=0\Leftrightarrow \ v=0$\newline\newline
+$\bullet\quad \left\| \lambda v\right\| = |\lambda|\left\| v\right\|,\  \forall \lambda \in\mathbb{F}$};
+
+%Orthogonal
+\node (Orth) [concept,minimum size=6cm]
+ at (N2){Orthogonality$$u,v\in V: <u,v>=0$$ }
+;
+\node [annotation,left,text width = 6cm] at (Orth.west){Orthogonality and 0\newline\newline
+$\bullet\quad 0$ is orthogonal to every vector in $V$\newline\newline
+$\bullet\quad 0$ is the only vector in $V$ that is orhogonal to itself.};
+\node [annotation,right] at (Orth.south east){Pythogorean Theorem\newline\newline
+If $u,v\in V$ are orthogonal vectors, then,\newline\newline
+$\left\| u+v\right\|^2 = \left\| u\right\|^2+\left\| v\right\|^2$};
+
+\node [annotation,above, text width=5cm ] at (Orth.north){Orthogonal decomposition\newline\newline
+Be $u,v\in V:\ v\ne 0$\newline\newline
+then,\newline\newline
+Set $c=\frac{<u,v>}{\left\| v\right\|^2}$ and $w= u- \frac{<u,v>}{\left\| v\right\|^2}v$\newline\newline
+$<w,v>=0$ and $u=cv+w$};
+
+\node [annotation,right, text width=5cm ] at (Orth.east){Cauchy-Schwarz Inequality \newline\newline
+Be $u,v\in V$, Then,\newline\newline
+$|<u,v>| \le \left\| u\right\|\left\| v \right\|$};
+
+\node [annotation,below, text width=5cm ] at (Orth.south){\textbf{Triangle Inequality}\newline\newline
+Be $u,v\in V:\ v\ne 0$\newline\newline
+then,\newline\newline
+ $\left\| u+v\right\|\le  \left\| u \right\| +\left\| v \right\|$\newline\newline
+ \textbf{Parallelogram Equality}\newline\newline
+Be $u,v\in V:\ v\ne 0$\newline\newline
+then,\newline\newline
+ $\left\| u+v\right\|^2 + \left\| u-v\right\|^2=  2\left(\left\| u \right\|^2 +\left\| v \right\|^2\right)$};
+
+\begin{pgfonlayer}{background}
+\draw [concept connection, ]  (IP) edge (Orth);
+
+  \end{pgfonlayer}
+\end{tikzpicture}
+ 
+\end{document}

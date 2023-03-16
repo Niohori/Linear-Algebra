@@ -34,33 +34,48 @@
         sibling angle = 45
     }
 ]
+\tikzstyle{circle connection bar}=[to path={
+  [every circle connection bar]
+  decorate [decoration={snake}]
+  { -- (\tikztotarget) \tikztonodes}
+},
+append after command={[fill=olive,draw=olive]}
+]
+
+\tikzstyle{example}=[{circle,decoration=saw,decorate,fill=gray!10,inner sep=8pt}]
 \definecolor{def}{RGB}{240,230,230}
  
 \coordinate(N1) at (-24.5,65.5) {} {} {} ;
-\coordinate(N2) at (-6,29.5) {} {};
-\coordinate(N3) at (-1.5,17) {} {} ;
-\coordinate(N4) at (-14.5,10.5) {} {};
-\coordinate(N5) at (-27,6.5) {};
-\coordinate(N6) at (-42.5,10);
-\coordinate(N7) at (-25,33.5) {} {} ;
-\coordinate(N8) at (-42,32.5) {} {} ;
-\coordinate(N9) at (-37.5,52.5) ;
-\coordinate(N10) at (-42.5,22) ;
-\coordinate(N11) at (-13,45.5) {} {} {} ;
-\coordinate(N12) at (-11,35.5) ;
-\coordinate(N13) at (-25,52) {} {} ;
-\coordinate(N14) at (-25,42) {} {} {};
-\coordinate(N15) at (-9.5,52.5) {} {} {} {};
+\coordinate(N2) at (-2,35.5) {} {} {};
+\coordinate(N3) at (-2,17) {} {} {} ;
+\coordinate(N4) at (-2,6.5) {} {} {} {} {};
+\coordinate(N5) at (-20,1) {} {} {};
+\coordinate(N6) at (-47,6.5) {};
+\coordinate(N7) at (-25,27) {} {} {} {} ;
+\coordinate(N8) at (-42,27) {} {} {} ;
+\coordinate(N9) at (-37.5,52) {} ;
+\coordinate(N10) at (-47,17) {} ;
+\coordinate(N11) at (-12.5,53.5) {} {} {} {} {} ;
+\coordinate(N12) at (-11,42.5) {} ;
+\coordinate(N13) at (-25.5,52) {} {} {} ;
+\coordinate(N14) at (-25.5,42) {} {} {} {} {};
+\coordinate(N15) at (-13,57.5) {} {} {} {} {};
 \coordinate(N16) at (-37.5,42) {} {} {};
-\coordinate(N17) at (1,40.5) {} {} {} {} {};
-\coordinate(N18) at (-16.5,53.5) {} {} {};
+\coordinate(N17) at (-13,23.5) {} {} {} {} {} {} {};
+\coordinate(N18) at (0,8.5) {} {} {} {} {} {};
 \coordinate(N19) at (-45,55.5) {};
 \coordinate(N20) at (-25,35.5) {};
+
+
+\draw[dashed] (N1) .. controls (-6,66.5) and (-1,65)  .. (N2) node[->,midway,fill=white]{begin here};
+
+
+
 %%Vector spaces
 \node (VS) [concept,minimum size=6cm]
  at (N1){Vector Space $$\mathbf{V}$$ $$\text{over a Field}$$$$\mathbb{F}$$}
-child [grow = north west]{node[left](VS2)  {$\quad\quad \mathscr{P}_n(\mathbb{F})$ \newline  Polynomials in $\mathbb{F}$ of degree $m$}}
-child {node[right](VS2)   {$\quad\quad \mathbb{F}^S$ \newline Functions from $S$ to $\mathbb{F}$\newline e.g. $S=[0,1]$}};
+child [grow = north west]{node[left,example](VS2)  {$\quad\quad \mathscr{P}_n(\mathbb{F})$ \newline  Polynomials in $\mathbb{F}$ of degree $m$}}
+child [grow = north east] {node[right,example](VS2)   {$\quad\quad \mathbb{F}^S$ \newline Functions from $S$ to $\mathbb{F}$\newline e.g. $S=[0,1]$}};
   \node [annotation,above,, fill=def] at (VS.north){A  vector space  over $\mathbb{F}$ is a set $V$ together with the operations of addition $V \times V \to V$ and scalar multiplication $\mathbb{F} \times V \to V$ satisfying :
 $ \newline \mathbf{Commutativity: } \newline u+v=v+u \ \forall u,v\in V$
 $ \newline\mathbf{Associativity: } \newline (u+v)+w= u+(v+w) \text{ and }  (ab) v = a(bv) \ \forall u,v,w\in V \text{ and }  a,b\in \mathbb{F}$ 
@@ -70,20 +85,23 @@ $ \newline \mathbf{Multiplicative \ identity: }  \newline  1v=v\  \forall \ v\in
 $ \newline \mathbf{Distributivity: } \newline  a(u+v)=au+av \text{ and } (a+b)u=au+bu\  \forall u,v\in V \text{ and } a,b\in\mathbb{F}$  };
 
 \draw [decorate, decoration={brace, amplitude=50pt}](-49,60)--(0.5,60);
+
+
+
 %%Subspaces
  \node (Subsp) at (N2){Subspaces $$ U(\mathbb{F},+,.) \subseteq V$$ }
-    child [grow =south east] {node[right](sum) {Sum $$U^{'}\doteq \sum U_i = $$ $$\left\{ \sum u_i : u_i \in  U_i \right\}$$}
-	child [grow = north ] {node [above](dsum) {Direct sum \newline $W=  U_1\oplus U_2 \oplus \dots \oplus U_k$}} };
+    child [grow =west] {node[left,fill=def](sum) {Sum $$U^{'}\doteq \sum U_i = $$ $$\left\{ \sum u_i : u_i \in  U_i \right\}$$}
+	child [grow =south ] {node [below,fill=def](dsum) {Direct sum \newline $W=  U_1\oplus U_2 \oplus \dots \oplus U_k$}} };
  \node [annotation,below, fill=def] at (Subsp.south){
 $ \newline \bullet \ 0 \in U$
 $\newline  \bullet \ u,w \in U \Rightarrow u+v \in U$ 
 $\newline  \bullet  a \in \mathbb{F},  \  u \in U \Rightarrow au \in U$  };
-\node [annotation,minimum width=5.5cm, minimum height=1cm,right,text width=5.5cm] at (dsum.east){
+\node [annotation,minimum width=5.5cm, minimum height=1cm,left,text width=5.5cm] at (dsum.west){
 $ \newline \bullet W= U_1+ U_2 + \dots +U_k $
 $\newline \bullet \forall i=1 \dots k$
 $\newline   \quad U_i \cap  \left(U_1+\dots +U_{i-1}+U_{i+1}+\dots  U_k\right) = {0}$
 };
-\node (dsum3)[annotation,minimum width=5.5cm, minimum height=1cm,above,text width=5.5cm] at (dsum.north){
+\node (dsum3)[annotation,minimum width=5.5cm, minimum height=1cm,below,text width=5.5cm] at (dsum.south){
 Be $V$ finite dimensional and $U_1,\dots , U_m$ subspaces pf $V$. Then $ U_1+\dots + U_m$ is a direct sum if and only if \newline
 $dim\left(U_1 + \dots  + U_m\right)= dim U_1+ \dots + dim U_m$
 };
@@ -97,7 +115,7 @@ $dim\left(U_1 + \dots  + U_m\right)= dim U_1+ \dots + dim U_m$
 %%Linear independency
 \node (LI) at (N4){Linear\\ independency and bases };
 \node [annotation, left, fill=def] at (LI.west){$\newline a_1v_1+ a_2v_2+\dots +a_mv_m=0 \newline \Rightarrow a_1=a_2=\dots  a_m=0$ };
-\node [annotation, above] at (LI.north){Length linearly independent lis $\le$ length of spanning list};
+\node [annotation, above] at (LI.north){Length linearly independent list $\le$ length of spanning list};
 \node [annotation, below] at (LI.south){A \textbf{basis} $=$ list in $V$ that is linearly independent ans spans $V$};
 \node [annotation,right, fill=def] at (LI.east){ $v_1, v_2, \dots, v_n \in V$ is a basis $\Leftrightarrow \forall v in V: v=a_1v1+a_2v_2+\dots +a_nv_n$};
 
@@ -119,10 +137,10 @@ $dim\left(U_1 + \dots  + U_m\right)= dim U_1+ \dots + dim U_m$
 
 %%Linear Maps
 \node (LM) at (N7){$  \quad\quad\mathscr{L}\left(V,W\right)$ \newline Linear Maps  $V\rightarrow W$ }
-child [grow = north west]{node[left](LM1)  {$\quad\quad T\in \mathscr{L}\left(\mathscr{P(\mathbb{R}}),\mathscr{P(\mathbb{R}})\right)$ \newline $$Tv=\dv{v}{z}$$}}
-child [grow = north east] {node[right](LM2)   {$\quad\quad T\in \mathscr{L}\left(\mathscr{P(\mathbb{R}}),\mathbb{R}\right)$ \newline $$Tv=\int_0^1 v(z)dz$$}}
+child [grow = south west]{node[left,example](LM1)  {$\quad\quad T\in \mathscr{L}\left(\mathscr{P(\mathbb{R}}),\mathscr{P(\mathbb{R}})\right)$ \newline $$Tv=\dv{v}{z}$$}}
+child [grow = north east] {node[right,example](LM2)   {$\quad\quad T\in \mathscr{L}\left(\mathscr{P(\mathbb{R}}),\mathbb{R}\right)$ \newline $$Tv=\int_0^1 v(z)dz$$}}
 child [grow = south east]{node[right](LM3)   {$dim \ \mathscr{L}\left(V,W\right) = \left(dim \  V\right)\left(dim \ W\right)$}}
-child [grow = south west]{node[left](LM4)   {Operator $\mathscr{L}\left(V\right)\doteq \mathscr{L}\left(V,V\right)$}};
+child [grow = north west]{node[left,fill=def](LM4)   {Operator $\mathscr{L}\left(V\right)\doteq \mathscr{L}\left(V,V\right)$}};
 \node [annotation,below, fill=def] at (LM.south){A \textbf{Linear Map} is a function  $T:V\rightarrow W$  with the properties:
 $ \newline \mathbf{Addidivity: } \newline T(u+v)=Tu+Tv \quad \forall u,v\in V$
 $ \newline\mathbf{Homogeneity: } \newline T(\lambda v)= \lambda Tv \quad \forall v \in V , \forall \lambda \in \mathbb{F}$  };
@@ -140,7 +158,7 @@ $ST \in\mathscr{L}\left(U,W\right)\doteq \left(ST\right)(u)= S\left(Tu\right) \f
 
 %%Null Spaces 
 \node (NS) at (N8){$\quad\quad$Null Spaces \newline $\quad\quad$ aka\newline Kernels  }
-child [grow = north west]{node[left](NS1)  {Range  of $T$: \newline is a subset of $W: $ $range\ T=\left\{Tv: v\in V\right\}$}};
+child [grow = north west]{node[left,fill=def](NS1)  {Range  of $T$: \newline is a subset of $W: $ $range\ T=\left\{Tv: v\in V\right\}$}};
 \node [annotation,below,fill=def] at (NS.south){given a $T\in \mathscr{L}\left(V,W\right)$, a  \textbf{Null Space }  is subset of $V$ for which:
 \newline $ null T=\left \{v\in V: Tv=0\right\}$};
 \node [annotation,left] at (NS.west){$nullT$ is a subspace of $V$};
@@ -153,6 +171,8 @@ child {node[right](SI2)   {Surjective (onto) $ T:V\rightarrow W$ is surjective i
 \node [annotation,above] at (SI1.north){$T$ injective $\Leftrightarrow null T = \left\{ 0 \right\}$};
 \node [annotation,left] at (SI1.west){A map to a smaller dimenstional space is not injective};
 \node [annotation,above] at (SI2.north){A map to a higher dimenstional space is not surjective};
+
+
 %%Fundamental Theorem of Algebra
 \node (FTA) at (N10){$\quad \quad$Fundamental \newline Theorem of Algebra };
 \node [annotation,below,text width=4.cm] at (FTA.south){$V$ finite-dimensional, $T \in \mathscr{L}\left(V,W\right)$
@@ -160,32 +180,43 @@ child {node[right](SI2)   {Surjective (onto) $ T:V\rightarrow W$ is surjective i
 
 %%Injectivity/Surjectivity
 \node (SI) at (N9){Injectivity/Surjectivity  }
-child [grow = north west]{node[left](SI1)  {Injective (one-to-one) $ T:V\rightarrow W: \newline Tu=Tv \Rightarrow u=v $}}
-child {node[right](SI2)   {Surjective (onto) $ T:V\rightarrow W$ is surjective if range $=W$ }};
+child [grow = north west]{node[left,fill=def](SI1)  {Injective (one-to-one) $ T:V\rightarrow W: \newline Tu=Tv \Rightarrow u=v $}}
+child {node[right,fill = def](SI2)   {Surjective (onto) $ T:V\rightarrow W$ is surjective if range $=W$ }};
 \node [annotation,above] at (SI1.north){$T$ injective $\Leftrightarrow null T = \left\{ 0 \right\}$};
 \node [annotation,left] at (SI1.west){A map to a smaller dimenstional space is not injective};
 \node [annotation,above] at (SI2.north){A map to a higher dimenstional space is not surjective};
 
 
-%%Fundamental Theorem of Algebra
-\node (FTA) at (N10){$\quad \quad$Fundamental \newline Theorem of Algebra };
+%%Fundamental Theorem of Linear Maps
+\node (FTA) at (N10){$\quad \quad$Fundamental \newline Theorem of Linear Maps };
 \node [annotation,below,text width=4.cm] at (FTA.south){$V$ finite-dimensional, $T \in \mathscr{L}\left(V,W\right)$
 \newline $dim\ V = dim \ null \ T + dim \ range \ T$};
 
 %%Matrices
 \node (Mat) at (N11){Matrix $$\mathscr{M}\left(T\right)$$ of a Linear Map}
-child {node[right](Mat1)   {Notation $ F^{m,n}$ is the set of all $m-by-n$ matrices with entries in $\mathbb{F}$}};
-\node [annotation,below,text width=5.cm, fill=def] at (Mat.south){Be $T \in \mathscr{L}\left(V,W\right)$  and $v_1,\dots,v_n$ a basis of $V$ and $w_1,\dots,w_m$ a basis of $V$:\newline 
+child [grow = north]{node[above,fill=def](Mat1)   {Notation $ F^{m,n}$ is the set of all $m-by-n$ matrices with entries in $\mathbb{F}$}}
+child[grow = south west] {node[left](Mat2)   {Matrix of an operator $\mathscr{M}\left(T\right)$}}
+child[grow = north east] {node[right](Mat3)   {Matrix of a vector}};
+\node [annotation,below,text width=5.cm, fill=def] at (Mat.south){Be $T \in \mathscr{L}\left(V,W\right)$  and $v_1,\dots,v_n$ a basis of $V$ and $w_1,\dots,w_m$ a basis of $W$:\newline 
 $\mathscr{M}\left(T,(v_1,\dots,v_n),(w_1,\dots,w_m)\right)$ has entries $A_{jk}$ such that:\newline
 $Tv_k = A_{1k}w_1+\dots + A_{mk}w_m$};
-\node [annotation,left,] at (Mat.west){$\bullet$ Be $S, \ T \in \mathscr{L}\left(V,W\right)$. Then $\mathscr{M}\left(S+T\right)=\mathscr{M}\left(S\right)+\mathscr{M}\left(T\right)$\newline \newline
+\node [annotation,left,] at (Mat.north west){$\bullet$ Be $S, \ T \in \mathscr{L}\left(V,W\right)$. Then $\mathscr{M}\left(S+T\right)=\mathscr{M}\left(S\right)+\mathscr{M}\left(T\right)$\newline \newline
 $\bullet$ $\mathscr{M}(T)_{\centerdot k}= \mathscr{M}(v_k)$\newline\newline 
 $\bullet$ Be $T \in \mathscr{L}\left(V,W\right)$ and $v \in V$. Suppose $v_1\dots v_n$ is a basis of $V$ and $w_1 \dots w_m $ a basis of $W$. Then $\mathscr{M}\left(Tv\right) =\mathscr{M}\left(T\right)\mathscr{M}\left(v\right)$  };
-%\node [annotation,above] at (Mat.north){Matrix mumtiplication: $\left(AC\right)_{jk} = \sum_{r=1}^{n} A_{jr}C_{rk}$};
+%%Matrix of a vector 
+\node [annotation,below,fill=def] at (Mat3.south){Be $v \in V$ and $v_1\dots v_n$ a basis of $V$. The matrix of $v$ with respect to this basis is the $n\times1$ matrix $\mathscr{M}(v)= \left(\begin{matrix} c_1\\ \vdots \\ c_n \end{matrix}\right)$ where $c_1\dots c_n$ are the scalars such that $v=c_1v_1+\dots +c_nv_n$};
+%%Matrix of an operator
+\node [annotation,below,fill=def] at (Mat2.south){Be $T \in \mathscr{L}\left(V\right)$  and $v_1,\dots,v_n$ a basis of $V$ :\newline 
+$\mathscr{M}\left(T,(v_1,\dots,v_n)\right)$ has entries $A_{jk}$ such that:\newline
+$Tv_k = A_{1k}v_1+\dots + A_{nk}v_n$ i.e.$$\mathscr{M}\left(T\right)= \left(\begin{matrix} A_{11}&\dots &A_{1n}\\
+\vdots& & \vdots\\
+A_{n1}&\dots&A_{nn}
+\end{matrix}\right)$$};
+
 
 %%Operations with Matrices
 \node (MatOp) at (N12){Matrix Operations}
-child  [grow = north east]{node[right](MatOp1) {$A_{j\centerdot} = (A_{j1}\dots A_{jm})$ $A_{\centerdot j } = \left(\begin{matrix}A_{1j} \\
+child  [grow = north east]{node[right,fill=def](MatOp1) {$A_{j\centerdot} = (A_{j1}\dots A_{jm})$ $A_{\centerdot j } = \left(\begin{matrix}A_{1j} \\
  \vdots \\A_{mj}\end{matrix}\right)$}};
 \node [annotation,left,] at (MatOp.west){$T \in \mathscr{L}(U,V), S\in \mathscr{L}(V,W),$\newline
 $ \mathscr{M}(ST)=\mathscr{M}(S)\mathscr{M}(T)$ };
@@ -205,9 +236,6 @@ $ \mathscr{M}(ST)=\mathscr{M}(S)\mathscr{M}(T)$ };
 \node [annotation,above, ] at (Iso.north){ $V$ and $W$ isomorphic $\Leftrightarrow dim V = dim W$};
 \node [annotation,below,] at (Iso.south){if $\mathscr{L}(U,V)$ and $\mathbb{F}^{m,n}$ are isomorphic  };
 
-%%Matrix of a vector 
-\node (MoV) at (N15){Matrix of a vector };
-\node [annotation,below,] at (MoV.south){Be $v \in V$ and $v_1\dots v_n$ a basis of $V$. The matrix of $v$ with respect to this basis is the $n\times1$ matrix $\mathscr{M}(v)= \left(\begin{matrix} c_1\\ \vdots \\ c_n \end{matrix}\right)$ where $c_1\dots c_n$ are the scalars such that $v=c_1v_1+\dots +c_nv_n$};
 
 %%Invertibility equivalent  surjectivity 
 \node (IeqS) at (N16){Injectivity $\Leftrightarrow$ surjectivity in finite-dimensions };
@@ -221,24 +249,18 @@ $\begin{array}{ll}
 
 %%Product of Vector Spaces 
 \node (PoVS) at (N17){Product of Vector Spaces \\ (= a vector space)};
-\node [annotation,above,text width=7cm,fill=def] at (PoVS.north){Suppose $V_1\dots V_m$ are vector spaces over $\mathbb{F}$\newline\newline
+\node [annotation,below,text width=7cm,fill=def] at (PoVS.south){Suppose $V_1\dots V_m$ are vector spaces over $\mathbb{F}$\newline\newline
 $\bullet$ The \textbf{product} $V_1\times \dots \times V_m$ is defined by\newline $V_1\times \dots \times V_m=\left\{(v_1,\dots ,v_m) :v_1\in V_1 \dots v_m\in V_m\right\}$\newline\newline
 $\blacksquare$         Algebra on $ V_1\times \dots \times V_m$\newline\newline
 $\bullet$ \textbf{Addition: }$(u_1,\dots ,u_m)+(v_1,\dots ,v_m)= (u_1+v_1,\dots ,u_m+v_m) $\newline\newline
 $\bullet$ \textbf{Scalar multiplication: }$\lambda(v_1,\dots ,v_m)= (\lambda v_1,\dots ,\lambda v_m) $};
-\node  [annotation,right] at (PoVS.east){$dim\left(V_1\times \dots \times V_m\right) = dim V_1+\dots + dim V_m$};
-\node (PoVS1) [annotation,below] at (PoVS.south){$U_1, \dots , U_m$ subspaces of $V$. Be a linear map $\Gamma: U_1 \times\dots \times U_m\rightarrow  U_1 +\dots + U_m$ defined as \newline
+\node  [annotation,above] at (PoVS.north){$dim\left(V_1\times \dots \times V_m\right) = dim V_1+\dots + dim V_m$};
+\node (PoVS1) [annotation,right] at (PoVS.east){$U_1, \dots , U_m$ subspaces of $V$. Be a linear map $\Gamma: U_1 \times\dots \times U_m\rightarrow  U_1 +\dots + U_m$ defined as \newline
 $\Gamma\left(u_1, \dots , u_m \right)= u_1+\dots +  u_m.$\newline
 Then  $U_1 +\dots + U_m$ is a direct sum if and only if $\Gamma$ is injective};
 
-%%Quotient Space 
-\node (QS) at (N18){Quotient Space  $$V\diagup U$$};
-\node [annotation,above ,fill = def] at (QS.north){Be $U$ a subspace of $V$. The \textbf{quotient space } $V\diagup U$ is the set of \textbf{all affine } subsets of $V$ \textbf{parallel} to $U$. I.e.\newline\newline
-$V\diagup U = \left\{ v+U: v\in V\right\}$};
-\node [annotation,below,fill = def] at (QS.south){$\mathbf{v+U}$\newline\newline
-Be $v\in V, U \text{ subspace of } V$$$v+U= \left\{ v+u: u\in U\right\}$$};
-\node [annotation,left,fill = def] at (QS.west){$\bullet$\textbf{Affine subset} of $V$ is a subset of $V$ of the form $v+U$ for some $v\in V$ and some subspace $U$ of $V$\newline\newline
-$\bullet$\textbf{Parallel: }For $v\in V$ and $U$ a subspace of $V$, the \textbf{affine subset} $ v+U$ is said to be parallel};
+
+
 
 
 \begin{pgfonlayer}{background}
@@ -256,6 +278,7 @@ $\bullet$\textbf{Parallel: }For $v\in V$ and $U$ a subspace of $V$, the \textbf{
 \draw [concept connection,->]  (Dim) edge (FTA);
 \draw [concept connection,->]  (FDS) edge (FTA);
 \draw [concept connection,]  (LM) edge (Mat);
+\draw [concept connection,dotted, thin]  (Mat2) edge (LM4);
 \draw [concept connection,]  (Mat) edge (MatOp);
 \draw [concept connection,]  (Mat) edge (Inv);
 \draw [concept connection,]  (LM) edge (Iso);
@@ -263,12 +286,12 @@ $\bullet$\textbf{Parallel: }For $v\in V$ and $U$ a subspace of $V$, the \textbf{
 \draw [dotted, very thick ,->]  (Iso) edge (LM3);
 \draw [dotted, very thick ,->]  (Dim) edge (LM3);
 \draw [dotted, very thick ,->]  (FTA) edge (LM3);
-\draw [dotted, very thick]  (Mat) edge (MoV);
 \draw [dotted, very thick]  (Inv) edge (IeqS);
 \draw [dotted, very thick ]  (SI) edge (IeqS);
 \draw [dotted, very thick ]  (LM4) edge (IeqS);
 \draw [dotted, very thick ,->]  (PoVS1) edge (dsum3);
   \end{pgfonlayer}
+
 
 \end{tikzpicture}
  
