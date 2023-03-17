@@ -53,7 +53,7 @@ append after command={[fill=olive,draw=olive]}
  
 \coordinate(N1) at (-13.5,73) {} {} {} {} {} {} {} ;
 \coordinate(N2) at (10,73) {} {} {} {} {} {};
-\coordinate(N3) at (-13,55) {} {} {} {} {} {} ;
+\coordinate(N3) at (-3.5,57) {} {} {} {} {} {} {} {} ;
 \coordinate(N4) at (-3,65) {} {} {} {} {} {} {} {};
 \coordinate(N5) at (9.5,65) {} {} {};
 \coordinate(N6) at (9.5,55) {} {} {} {};
@@ -128,17 +128,36 @@ Be $u,v\in V$, Then,\newline\newline
 $|<u,v>| \le \left\| u\right\|\left\| v \right\|$};
 
 \node [annotation,below, text width=5cm ] at (Orth.south){\textbf{Triangle Inequality}\newline\newline
-Be $u,v\in V:\ v\ne 0$\newline\newline
+\includegraphics[width=2cm]{fig173.pdf}\newline\newline
+Be $u,v\in V:\ v\ne 0$
 then,\newline\newline
  $\left\| u+v\right\|\le  \left\| u \right\| +\left\| v \right\|$\newline\newline
  \textbf{Parallelogram Equality}\newline\newline
+ \includegraphics[width=2cm]{fig174.pdf}\newline\newline
 Be $u,v\in V:\ v\ne 0$\newline\newline
 then,\newline\newline
  $\left\| u+v\right\|^2 + \left\| u-v\right\|^2=  2\left(\left\| u \right\|^2 +\left\| v \right\|^2\right)$};
 
+
+%Orthonormal bases
+\node (OB) [concept,minimum size=6.5cm]
+ at (N3){Orthonormal bases $$e_1\dots e_m \in V$$ is orthonormal if
+$$  <e_j,e_k> = \left\{\begin{array}{ll} 1 & j= k\\\\
+0& j\neq k\end{array}\right.$$ };
+\node [annotation,below,text width = 5.5cm,] at (OB.south){Be $e_1\dots e_m$ an orthonormal list in $V$\newline\newline
+$\left\| a_1e_1+\dots + a_me_m\right\|^2= |a_1|^2+\dots |a_m|^2$\newline \newline $\forall a_1\dots a_m \in \mathbb{F} $};
+\node [annotation,left,fill = def] at (OB.west){\textbf{Orthonormal basis of $V$}\newline\newline
+is an orthonormal list of vectors of $V$ that is also a basis of $V$.};
+\node [annotation,right,text width = 4cm] at (OB.east){\textbf{Orthonormal list is linearly independent.}
+\newline\newline \textbf{Orthonormal list of length $dim\ V$ is an orthonormal basis of $V$}
+};
+
+
+
 \begin{pgfonlayer}{background}
 \draw [concept connection, ]  (IP) edge (Orth);
-
+\draw [concept connection, ]  (OB) edge (Orth);
+\draw [concept connection, ]  (OB) edge (IP);
   \end{pgfonlayer}
 \end{tikzpicture}
  
