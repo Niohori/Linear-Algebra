@@ -53,8 +53,8 @@ append after command={[fill=olive,draw=olive]}
  
 \coordinate(N1) at (-13.5,73) {} {} {} {} {} {} {} ;
 \coordinate(N2) at (10,73) {} {} {} {} {} {};
-\coordinate(N3) at (-3.5,57) {} {} {} {} {} {} {} {} ;
-\coordinate(N4) at (-3,65) {} {} {} {} {} {} {} {};
+\coordinate(N3) at (-0.5,58.5) {} {} {} {} {} {} {} {} {} ;
+\coordinate(N4) at (-14.5,49) {} {} {} {} {} {} {} {} {} {};
 \coordinate(N5) at (9.5,65) {} {} {};
 \coordinate(N6) at (9.5,55) {} {} {} {};
 \coordinate(N7) at (-15,43.5) {} {} {} {} {} {} ;
@@ -154,10 +154,42 @@ is an orthonormal list of vectors of $V$ that is also a basis of $V$.};
 
 
 
+
+%Applications of Orthonormal bases, 
+\node (AOB) [,text width = 3.5cm,concept, fill = gray!5]
+ at (N4){Applications of Orthonormal bases,}
+ child [grow = north ]{node[minimum size=3.2cm,above,fill= gray!5](AOB1)  { Upper-triangular matrix}
+};
+\node [annotation,below,text width = 5.5cm,] at (AOB.south){Be $e_1\dots e_m$ an orthonormal list in $V$\newline\newline
+and $V\in V$, then\newline\newline
+$v=<v,e_1>e_1+\dots + <v,e_n>e_n$\newline \newline and\newline\newline
+$\left\|v\right\|^2= |<v,e_1>|^2+\dots + |<v,e_n>|^2$};
+\node [annotation,right,text width = 5.5cm] at (AOB.east){\textbf{Gram-Schmidt Procedure}\newline\newline
+Be $v_1,\dots,v_m$ linearly independent $\in V$\newline\newline
+Let $ e_1= \frac{v_1}{\left\|v_1\right\|}$\newline\newline
+For $j=2,\dots,m$ define $e_j$ inductively by \newline\newline
+$ e_j= \frac{v_j -<v_j,e_1>e_1-\dots - <v_j,e_{j-1}>e_{j-1}}{\left\| v_j -<v_j,e_1>e_1-\dots - <v_j,e_{j-1}>e_{j-1}\right\| }$
+};
+\node [annotation,left,text width = 5.5cm,] at (AOB.west){$\bullet$ Every finite-dimensional inner product space has an orthonormal basis.\newline\newline
+$\bullet$ Be $V$ finite-dimensional. Then , every orthonormal list of vectors  $\in V$ can be extended to an orthonormal basis of $V$.};
+
+\node [annotation,left,text width = 5.5cm,] at (AOB1.west){Be $T\in \mathscr{L}\left(V\right)$. If $T$ has an upper-triangular matrix with respect to some basis of $ V$. Then,\newline\newline
+$T$ has an upper-triangular matrix with respect to some orthonormal basis of $V$.};
+
+\node [annotation,above,text width = 5.5cm,] at (AOB1.north){\textbf{Schur's Theorem}\newline\newline
+Be $V$ a finite-dimensional \textbf{complex}  vector space and $T\in \mathscr{L}\left(V\right)$. Then, \newline\newline
+$T$ has an upper-trianguler matrix with respect to some orthonormal basis of $V$.};
+
+\node [annotation,right,text width = 5.5cm] at (AOB1.east){\textbf{Riezz Representation Theorem}\newline\newline
+Be $V$ a finite-dimensional vector space and $\phi$ a linear functional on $V$. Then, \newline\newline
+there is a unique vector $u\in V$ such that \newline\newline
+$\phi(v)= <v,u>,\quad \forall v\in V.$};
+
 \begin{pgfonlayer}{background}
 \draw [concept connection, ]  (IP) edge (Orth);
 \draw [concept connection, ]  (OB) edge (Orth);
 \draw [concept connection, ]  (OB) edge (IP);
+\draw [concept connection, ]  (AOB) edge (OB);
   \end{pgfonlayer}
 \end{tikzpicture}
  
